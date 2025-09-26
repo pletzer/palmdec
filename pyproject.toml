@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "palmdec"
+version = "0.1.0"
+description = "Differential Exterior Calculus Applied to PALM Simulation Data"
+authors = [
+    { name = "Alexander Pletzer", email = "alexander@gokliya.net" }
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+
+dependencies = [
+    "xarray",
+    "netCDF4",
+    "vtk",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
