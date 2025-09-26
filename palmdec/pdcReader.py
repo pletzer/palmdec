@@ -14,7 +14,7 @@ class Reader:
         self.time = self.ds['time']
         
         # Assume equal spacing, all axes are monotonically increasing
-        hx, hy, hz = x[1] - x[0], y[1] - y[0], z[1] - z[0]
+        self.hx, self.hy, self.hz = x[1] - x[0], y[1] - y[0], z[1] - z[0]
         
         # Number of points = number of cells + 1
         nx = len(x)
@@ -32,7 +32,7 @@ class Reader:
         
         xmin, ymin, zmin = x[0], y[0], z[0]
         self.grid.SetOrigin(xmin, ymin, zmin)
-        self.grid.SetSpacing(hx, hy, hz)
+        self.grid.SetSpacing(self.hx, self.hy, self.hz)
         
         # Add the face centred velocity data. Take time index 0
         u2 = numpy_support.numpy_to_vtk(self.ds['u'].values[0,...].ravel(order="C"), deep=True)
