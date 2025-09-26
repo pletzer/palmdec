@@ -1,6 +1,7 @@
 import vtk
 import xarray as xr
 import numpy as np
+from vtk.util import numpy_support
 
 class Reader:
     
@@ -34,14 +35,17 @@ class Reader:
         self.grid.SetSpacing(hx, hy, hz)
         
         # Add the face centred velocity data
-        u2 = vtk.vtkFloatArray()
-        u2.SetNumberOfComponents(1)
-        # Attach to cells
-        u2.SetNumberOfTuples(nz * ny * nx)
+        u2 = numpy_support.numpy_to_vtk(self.ds['u'].values.ravel(order="C"), deep=True)
         u2.SetName("u2")
+        v2 = numpy_support.numpy_to_vtk(self.ds['v'].values.ravel(order="C"), deep=True)
+        v2.SetName("v2")
+        w2 = numpy_support.numpy_to_vtk(self.ds['w'].values.ravel(order="C"), deep=True)
+        v2.SetName("w2")
         
         # Add to cells
         self.grid.GetCellData().AddArray(u2)
+        self.grid.GetCellData().AddArray(v2)
+        self.grid.GetCellData().AddArray(w2)
 
     
     def getVtkGrid(self):
