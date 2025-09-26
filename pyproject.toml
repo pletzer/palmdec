@@ -24,6 +24,15 @@ dev = [
     "pytest",
 ]
 
+[tool.setuptools]
+# packages are in the top-level 'palmdec/' directory
+packages = ["palmdec"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+# include all files under palmdec/data
+palmdec = ["data/*"]
+
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-ra -q"
