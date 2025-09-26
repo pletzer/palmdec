@@ -34,12 +34,12 @@ class Reader:
         self.grid.SetOrigin(xmin, ymin, zmin)
         self.grid.SetSpacing(hx, hy, hz)
         
-        # Add the face centred velocity data
-        u2 = numpy_support.numpy_to_vtk(self.ds['u'].values.ravel(order="C"), deep=True)
+        # Add the face centred velocity data. Take time index 0
+        u2 = numpy_support.numpy_to_vtk(self.ds['u'].values[0,...].ravel(order="C"), deep=True)
         u2.SetName("u2")
-        v2 = numpy_support.numpy_to_vtk(self.ds['v'].values.ravel(order="C"), deep=True)
+        v2 = numpy_support.numpy_to_vtk(self.ds['v'].values[0,...].ravel(order="C"), deep=True)
         v2.SetName("v2")
-        w2 = numpy_support.numpy_to_vtk(self.ds['w'].values.ravel(order="C"), deep=True)
+        w2 = numpy_support.numpy_to_vtk(self.ds['w'].values[0,...].ravel(order="C"), deep=True)
         v2.SetName("w2")
         
         # Add to cells
